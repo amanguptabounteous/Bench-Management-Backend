@@ -1,7 +1,7 @@
 services:
   - type: web
     name: bench-backend
-    env: spring
+    env: java # Correct runtime for Java/Spring
     rootDir: Bench-Management-Backend
     branch: main
     buildCommand: ./gradlew build
@@ -22,9 +22,8 @@ services:
           name: bench-management
           property: password
       
-      # JWT variables added directly for the test
+      # JWT variables
       - key: JWT_SECRET
-        sync: false # Prevents this value from showing up in the Render UI
         value: YjdhN2h1QWVkM3RhX2VJY3EyMG1yb2JhWWNfR1FkWldkOVB3Q0ZrcEVlc2Vlc1U=nYjdhN2h1QWVkM3RhX2VJY3EyMG1yb2JhWWNfR1FkWldkOVB3Q0ZrcEVlc2Vlc1U=
       - key: JWT_EXPIRATION
         value: 86400000
