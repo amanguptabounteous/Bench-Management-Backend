@@ -2,16 +2,21 @@ services:
   - type: web
     name: bench-backend
     env: docker
-    # Tells Render to run the build inside this folder
     rootDir: ./bench-backend
     plan: free
-    # Path to the Dockerfile from the repository root
     dockerfilePath: ./bench-backend/Dockerfile
     envVars:
-      - key: SPRING_DATASOURCE_URL
+      # 1. Pull Render's URL into a temporary variable
+      - key: DB_CONNECTION_STRING 
         fromDatabase:
           name: bench-management
           property: connectionString
+      
+      # 2. Build the correct JDBC URL for Spring
+      - key: SPRING_DATASOURCE_URL 
+        value: jdbc:${DB_CONNECTION_STRING}
+
+      # These are still needed for Spring's auto-configuration
       - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
           name: bench-management
@@ -20,7 +25,9 @@ services:
         fromDatabase:
           name: bench-management
           property: password
+
+      # Your other variables
       - key: JWT_SECRET
-        fromGroup: enviroment # Assuming your group is named 'enviroment'
+        fromGroup: enviroment
       - key: JWT_EXPIRATION
         value: 86400000
