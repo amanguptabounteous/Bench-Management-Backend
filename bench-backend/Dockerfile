@@ -7,7 +7,8 @@ COPY build.gradle .
 COPY settings.gradle .
 COPY src ./src
 RUN chmod +x ./gradlew
-RUN ./gradlew build --no-daemon
+
+RUN ./gradlew build --no-daemon --stacktrace
 
 # Stage 2: Create the final, smaller runtime image
 FROM eclipse-temurin:17-jre-jammy
