@@ -1,21 +1,28 @@
 services:
   - type: web
     name: bench-backend
+    env: spring
     rootDir: Bench-Management-Backend
     branch: main
     buildCommand: ./gradlew build
     startCommand: java -jar build/libs/*.jar
     plan: free
+    
+    # Links your JWT_SECRET from the Environment Group
+    envVarGroups:
+      - name: enviroment 
+
+    # Connects to your database service named "bench-management"
     envVars:
       - key: SPRING_DATASOURCE_URL
-        value: jdbc:mysql://<RENDER_MYSQL_HOST>:3306/benchmgmt?useSSL=false&serverTimezone=UTC
+        fromDatabase:
+          name: bench-management # <-- Correct service name
+          property: connectionString
       - key: SPRING_DATASOURCE_USERNAME
-        value: your_mysql_user
+        fromDatabase:
+          name: bench-management # <-- Correct service name
+          property: user
       - key: SPRING_DATASOURCE_PASSWORD
-        value: your_mysql_password
-      - key: SERVER_PORT
-        value: 8080
-      - key: JWT_SECRET
-        value: your_jwt_secret
-      - key: JWT_EXPIRATION
-        value: 86400000
+        fromDatabase:
+          name: bench-management # <-- Correct service name
+          property: password
