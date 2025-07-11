@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: bench-management-service
+    runtime: java
+    branch: main
+    buildCommand: ./mvnw clean install
+    startCommand: java -jar target/*.jar
+    plan: free
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:mysql://<RENDER_MYSQL_HOST>:3306/benchmgmt?useSSL=false&serverTimezone=UTC
+      - key: SPRING_DATASOURCE_USERNAME
+        value: your_mysql_user
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: your_mysql_password
+      - key: SERVER_PORT
+        value: 8080
+      - key: JWT_SECRET
+        value: YjdhN2h1QWVkM3RhX2VJY3EyMG1yb2JhWWNfR1FkWldkOVB3Q0ZrcEVlc2Vlc1U=nYjdhN2h1QWVkM3RhX2VJY3EyMG1yb2JhWWNfR1FkWldkOVB3Q0ZrcEVlc2Vlc1U=
+      - key: JWT_EXPIRATION
+        value: 86400000
