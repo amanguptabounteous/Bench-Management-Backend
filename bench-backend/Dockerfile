@@ -1,11 +1,11 @@
 # Stage 1: Build the application
 FROM eclipse-temurin:17-jdk-jammy as builder
 WORKDIR /app
-COPY bench-backend/gradlew .
-COPY bench-backend/gradle ./gradle
-COPY bench-backend/build.gradle .
-COPY bench-backend/settings.gradle .
-COPY bench-backend/src ./src
+COPY gradlew .
+COPY gradle ./gradle
+COPY build.gradle .
+COPY settings.gradle .
+COPY src ./src
 RUN chmod +x ./gradlew
 RUN ./gradlew build --no-daemon
 
