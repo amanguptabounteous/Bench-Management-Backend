@@ -1,7 +1,6 @@
 services:
   - type: web
     name: bench-backend
-    runtime: java
     rootDir: Bench-Management-Backend
     branch: main
     buildCommand: ./gradlew build
