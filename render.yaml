@@ -7,22 +7,18 @@ services:
     buildCommand: ./gradlew build
     startCommand: java -jar build/libs/*.jar
     plan: free
-    
-    # Links your JWT_SECRET from the Environment Group
     envVarGroups:
-      - name: enviroment 
-
-    # Connects to your database service named "bench-management"
+      - name: enviroment
     envVars:
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
-          name: bench-management # <-- Correct service name
+          name: bench-management
           property: connectionString
       - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
-          name: bench-management # <-- Correct service name
+          name: bench-management
           property: user
       - key: SPRING_DATASOURCE_PASSWORD
         fromDatabase:
-          name: bench-management # <-- Correct service name
+          name: bench-management
           property: password
