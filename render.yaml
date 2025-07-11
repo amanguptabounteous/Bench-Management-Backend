@@ -1,12 +1,10 @@
 services:
   - type: web
     name: bench-backend
-    env: java # Correct runtime for Java/Spring
+    env: docker # Set the environment to Docker
     rootDir: Bench-Management-Backend
-    branch: main
-    buildCommand: ./gradlew build
-    startCommand: java -jar build/libs/*.jar
     plan: free
+    dockerfilePath: ./Dockerfile
     envVars:
       # Database variables
       - key: SPRING_DATASOURCE_URL
