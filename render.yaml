@@ -1,12 +1,11 @@
 services:
   - type: web
     name: bench-backend
-    env: docker # Set the environment to Docker
-    rootDir: Bench-Management-Backend
+    env: docker
+    rootDir: bench-backend         # 👈 updated
     plan: free
     dockerfilePath: ./Dockerfile
     envVars:
-      # Database variables
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
           name: bench-management
@@ -19,8 +18,7 @@ services:
         fromDatabase:
           name: bench-management
           property: password
-      
-      # JWT variables
+
       - key: JWT_SECRET
         value: YjdhN2h1QWVkM3RhX2VJY3EyMG1yb2JhWWNfR1FkWldkOVB3Q0ZrcEVlc2Vlc1U=nYjdhN2h1QWVkM3RhX2VJY3EyMG1yb2JhWWNfR1FkWldkOVB3Q0ZrcEVlc2Vlc1U=
       - key: JWT_EXPIRATION
