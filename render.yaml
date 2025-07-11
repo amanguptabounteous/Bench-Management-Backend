@@ -2,9 +2,11 @@ services:
   - type: web
     name: bench-backend
     env: docker
-    rootDir: bench-backend         # 👈 updated
+    # Tells Render to run the build inside this folder
+    rootDir: ./bench-backend
     plan: free
-    dockerfilePath: ./Dockerfile
+    # Path to the Dockerfile from the repository root
+    dockerfilePath: ./bench-backend/Dockerfile
     envVars:
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
@@ -18,8 +20,7 @@ services:
         fromDatabase:
           name: bench-management
           property: password
-
       - key: JWT_SECRET
-        value: YjdhN2h1QWVkM3RhX2VJY3EyMG1yb2JhWWNfR1FkWldkOVB3Q0ZrcEVlc2Vlc1U=nYjdhN2h1QWVkM3RhX2VJY3EyMG1yb2JhWWNfR1FkWldkOVB3Q0ZrcEVlc2Vlc1U=
+        fromGroup: enviroment # Assuming your group is named 'enviroment'
       - key: JWT_EXPIRATION
         value: 86400000
