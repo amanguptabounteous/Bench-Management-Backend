@@ -7,9 +7,8 @@ services:
     buildCommand: ./gradlew build
     startCommand: java -jar build/libs/*.jar
     plan: free
-    envVarGroups:
-      - name: enviroment
     envVars:
+      # Database variables
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
           name: bench-management
@@ -22,3 +21,10 @@ services:
         fromDatabase:
           name: bench-management
           property: password
+      
+      # JWT variables added directly for the test
+      - key: JWT_SECRET
+        sync: false # Prevents this value from showing up in the Render UI
+        value: YjdhN2h1QWVkM3RhX2VJY3EyMG1yb2JhWWNfR1FkWldkOVB3Q0ZrcEVlc2Vlc1U=nYjdhN2h1QWVkM3RhX2VJY3EyMG1yb2JhWWNfR1FkWldkOVB3Q0ZrcEVlc2Vlc1U=
+      - key: JWT_EXPIRATION
+        value: 86400000
